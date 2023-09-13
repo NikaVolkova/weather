@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import { MonthStatistics } from './pages/MonthStatistics/MonthStatistics';
 import { Header } from "./shared/Header/Header";
+import {Popup} from './shared/Popup/Popup';
 export enum RoutesList {
   Home = "/",
   MonthStatistics="/month-statistics",
@@ -12,7 +13,10 @@ export enum RoutesList {
 
 function App() {
   return (
+    <div className="global-container">
+      <Popup/>
     <div className="container">
+      
       <Header/>
       <BrowserRouter>
       <Routes>
@@ -20,6 +24,7 @@ function App() {
       <Route path={RoutesList.MonthStatistics} element={<MonthStatistics />} />
       </Routes>
     </BrowserRouter>
+    </div>
     </div>
   );
 }
