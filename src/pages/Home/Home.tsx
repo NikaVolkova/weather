@@ -1,4 +1,7 @@
-import React, {FC} from 'react';
+import React, {useEffect} from 'react';
+import { useCustomDispatch, useCustomSelector } from '../../hooks/store';
+import { selectCurrentWeatherData } from '../../store/selectors';
+import { fetchCurrentWeather } from '../../store/thunks/fetchCurrentWeather';
 import styles from './Home.module.scss';
 import {ThisDay} from './components/ThisDay/ThisDay';
 import { ThisDayInfo } from './components/ThisDayInfo/ThisDayInfo';
@@ -7,9 +10,15 @@ interface Props{
 
 }
 const Home = ()=>{
+    const dispatch = useCustomDispatch();
+    const { weather } = useCustomSelector(selectCurrentWeatherData);
+  
+    useEffect(() => {
+      dispatch(fetchCurrentWeather('paris'));
+    }, []);
     return (<div className={styles.home}> 
      <div className={styles.wrapper}>
-    <ThisDay/> 
+    <ThisDay weather={weather}/> 
     <ThisDayInfo/>
      </div>
      <Days/>
